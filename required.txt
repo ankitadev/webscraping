@@ -1,21 +1,31 @@
-Required packages and drivers
+********************** Required packages and drivers **********************
 
 1. Selenium
+    pip install -U selenium
+             or
+    pip install -r setup.py
+    i.e touch setup.py with 'selenium' in it
+
 2. ChromeDriver
+    I have included ChromeDriver in the 'include' folder,
+    but if you want to create your own project download ChromeDriver and include your path in your code
+
 3. Virtualenv
+    [sudo] pip install virtualenv
 
-steps:
+*********************** steps **************************
 
-//create a virtual environment
+** create a virtual environment
 1. virtualenv webscraping
 
-//install the dependency into your virtualenv
+** install the dependency into your virtualenv
 2. pip install -r setup.py
 
-//activate the virtualenv
+** activate the virtualenv
 3. Source webscraping/bin/activate
 
-other required pakages into your virtual environment:
+************* other required packages to install into your virtual environment ************
+
 1. pip install pandas
 2. pip install requests
 3. pip install bs4
