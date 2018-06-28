@@ -1,0 +1,10 @@
+Required packages and drivers
+
+1. Selenium
+2. ChromeDriver
+3. Virtualenv
+
+steps
+
+1. virtualenv webscraping
+2. Source webscraping/bin/activate
