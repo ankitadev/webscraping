@@ -2,7 +2,7 @@
 scraping the web using Selenium, Beautifulsoup and requests in python
 # Required packages and drivers
 1. Selenium
-    pip install -U selenium
+    `pip install -U selenium`
              or
     pip install -r setup.py
     i.e touch setup.py with 'selenium' in it
