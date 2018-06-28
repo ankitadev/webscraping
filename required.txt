@@ -4,7 +4,18 @@ Required packages and drivers
 2. ChromeDriver
 3. Virtualenv
 
-steps
+steps:
 
+//create a virtual environment
 1. virtualenv webscraping
-2. Source webscraping/bin/activate
+
+//install the dependency into your virtualenv
+2. pip install -r setup.py
+
+//activate the virtualenv
+3. Source webscraping/bin/activate
+
+other required pakages into your virtual environment:
+1. pip install pandas
+2. pip install requests
+3. pip install bs4

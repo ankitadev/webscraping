@@ -19,7 +19,6 @@ for i in range(300000, 400000):
     try:
         print ('\n\n\n')
         print ('********************** COMPANY' , i , '********************')
-        print (count)
         business_url = "https://businesssearch.sos.ca.gov/CBS/SearchResults?SearchType=NUMBER&SearchCriteria=C0" + str(i) + "&SearchSubType=Exact"
         browser.get(business_url)
 
