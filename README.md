@@ -18,13 +18,15 @@ i.e touch setup.py with 'selenium' in it
 
 ### ChromeDriver
 
-ChromeDriver lets you perform tasks in the browser
+[ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) lets you perform tasks in the browser
 
 I have included ChromeDriver in the 'include' folder,
 but if you want to create your own project download ChromeDriver and include your path in your code
 
 ### Virtualenv
 
+ [Virtualenv](https://virtualenv.pypa.io/en/stable/) is a tool to create isolated Python environments.
+ 
 `[sudo] pip install virtualenv`
 
 ## Project Setup
