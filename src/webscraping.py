@@ -8,6 +8,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import NoSuchElementException
+import csv
 
 option = webdriver.ChromeOptions()
 option.add_argument("--incognito")
@@ -15,7 +16,7 @@ option.add_argument("--disable-infobars")
 
 browser = webdriver.Chrome(executable_path='../include/chromedriver', chrome_options=option)
 
-for i in range(300000, 400000):
+for i in range(300000, 300007):
     try:
         print ('\n\n\n')
         print ('********************** COMPANY', i, '********************')
@@ -32,8 +33,17 @@ for i in range(300000, 400000):
         registration_key = browser.find_elements_by_xpath("//div[@class='col-sm-8 col-xs-6']")
         key = [x.text for x in registration_key]
 
-        for element, key in zip(element, key):
-            print(element + ": " + key, '\n')
+        with open('california-state-data.csv', 'wb') as csvFile:
+            #fieldnames = ['Registration Date:', 'Jurisdiction:', 'Entity Type:','Status:',	'Agent for Service of Process:',	'Entity Address:',	'Entity Mailing Address:']
+            writer = csv.writer(csvFile)
+            #writer.writeheader()
+            #writer.writerows(key)
+            df = pd.DataFrame(key)
+            df.to_csv("california-state-data.csv")
+            for element, key in zip(element, key):
+                print(element + ": " + key, '\n')
+                writer.writerows(key)
+
 
     except NoSuchElementException:
         print("No agent found with this number!!")
