@@ -1,12 +1,5 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
-
-import pandas as pd
-import requests
-from bs4 import BeautifulSoup
+import collections
 from selenium.common.exceptions import NoSuchElementException
 import csv
 
@@ -16,7 +9,7 @@ option.add_argument("--disable-infobars")
 
 browser = webdriver.Chrome(executable_path='../include/chromedriver', chrome_options=option)
 
-for i in range(300000, 300007):
+for i in range(300000, 400000):
     try:
         print ('\n\n\n')
         print ('********************** COMPANY', i, '********************')
@@ -27,23 +20,42 @@ for i in range(300000, 300007):
         titles_element = browser.find_element_by_xpath("//button[@name='EntityId']")
         titles_element.click()
 
-        registration_element = browser.find_elements_by_xpath("//div[@class='col-sm-4 col-xs-6']")
-        element = [x.text for x in registration_element]
-
         registration_key = browser.find_elements_by_xpath("//div[@class='col-sm-8 col-xs-6']")
-        key = [x.text for x in registration_key]
+        element1 = [x.text for x in registration_key]
 
-        with open('california-state-data.csv', 'wb') as csvFile:
-            #fieldnames = ['Registration Date:', 'Jurisdiction:', 'Entity Type:','Status:',	'Agent for Service of Process:',	'Entity Address:',	'Entity Mailing Address:']
-            writer = csv.writer(csvFile)
-            #writer.writeheader()
-            #writer.writerows(key)
-            df = pd.DataFrame(key)
-            df.to_csv("california-state-data.csv")
-            for element, key in zip(element, key):
-                print(element + ": " + key, '\n')
-                writer.writerows(key)
+        registration_element = browser.find_elements_by_xpath("//div[@class='col-sm-4 col-xs-6']")
+        element2 = [x.text for x in registration_element]
 
+        registration_name = browser.find_elements_by_xpath("// *[ @ id = 'maincontent'] / div[2] / div / h2")
+        companyName = [x.text for x in registration_name]
+
+
+        def convert(data):
+            if isinstance(data, basestring):
+                return str(data)
+            elif isinstance(data, collections.Mapping):
+                return dict(map(convert, data.iteritems()))
+            elif isinstance(data, collections.Iterable):
+                return type(data)(map(convert, data))
+            else:
+                return data
+
+        comp = convert(companyName)
+        for line in comp:
+            Type = line.split("    ")
+            x = Type[0]
+            y = Type[1]
+            print(x)
+            print(y)
+            mylist = [x, y]
+
+        key = convert(element2)
+        value = convert(element1)
+
+        with open('california-state.csv', 'a') as csvfile:
+            writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+            writer.writerow(mylist + value)
+        csvfile.close()
 
     except NoSuchElementException:
         print("No agent found with this number!!")
