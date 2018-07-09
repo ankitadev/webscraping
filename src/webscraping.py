@@ -9,7 +9,7 @@ option.add_argument("--disable-infobars")
 
 browser = webdriver.Chrome(executable_path='../include/chromedriver', chrome_options=option)
 
-for i in range(300000, 400000):
+for i in range(303928, 400000):
     try:
         print ('\n\n\n')
         print ('********************** COMPANY', i, '********************')
