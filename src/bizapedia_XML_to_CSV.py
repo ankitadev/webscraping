@@ -1,6 +1,5 @@
 import requests
 import csv
-import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 
 url = "https://www.bizapedia.com/bdmservice.asmx?op=LCSBN"
@@ -19,10 +18,7 @@ xml = """<?xml version="1.0" encoding="utf-8"?>
       <c>{c}</c>
     </LCSBN>
   </soap12:Body>
-</soap12:Envelope>""".format(k=name_k,n=name_n,
-                             c=name_c,
-                              pa=name_pa
-                            )
+</soap12:Envelope>""".format(k=name_k,n=name_n,c=name_c,pa=name_pa)
 headers = {'Content-Type': 'application/soap+xml'}
 
 
@@ -38,10 +34,8 @@ head = ['Entity Name','File Number','State','Filing Status','Entity Type','Filin
 csvwriter.writerow(head)
 
 soup = BeautifulSoup(result.content,'xml')
-#print soup
 
 for info in soup.find_all('LCBNResult'):
-    print ("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     row = []
     entity_name = info.find('EntityName').text
     row.append(entity_name)

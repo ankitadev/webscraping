@@ -12,7 +12,6 @@ browser = webdriver.Chrome(executable_path='../include/chromedriver', chrome_opt
 for i in range(303928, 500000):
     try:
         print ('\n')
-        print ('********************** COMPANY', i, '********************')
         business_url = "https://businesssearch.sos.ca.gov/CBS/SearchResults?SearchType=NUMBER&SearchCriteria=C0" + str(i) + "&SearchSubType=Exact"
         browser.get(business_url)
 
