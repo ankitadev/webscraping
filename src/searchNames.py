@@ -1,0 +1,5 @@
+import requests
+import xml.etree.ElementTree as ET
+import csv
+
+names = ["Firebase Inc.", "Firetalk Communications", "Firetide Inc.", "Fliptrack Inc.", "Fluid Entertainment", "Flypaper", "Formus Communications", "Forterra Systems", "FreeDecision", "Freeworks.com", "Ftrans Corp.", "FundersClub Inc.", "Fundly Inc.", "FurnitureFan", "Gene Logic", "GeneMachines", "GenePeeks", "Genscape", "Geofeedia Inc.", "Geometrix", "Gevo Inc.", "Gigabeat", "Gist Inc.", "Global CommerceZone", "Global Communication Devices", "GlobeImmune Inc.", "Go2 Media", "GoldRun Corp.", "GoodGuide Inc.", "GPC-Rx Corp.", "Grandis Inc.", "Granular Inc.", "Green Pacific Biologicals Inc.", "Grockit Inc.", "Gryphon Therapeutics", "Halo Data Devices", "HealthCare IT Inc.", "HealthOnline", "Healthrageous Inc.", "Healthvision Solutions Inc.", "Healthway Home Products Inc.", "Helicos BioSciences", "Hey Inc.", "Hollywood Interactive Group", "Hotel Booking Solutions", "HTG Molecular Diagnostics Inc.", "Huddler Inc.", "HVVi Semiconductors", "HyperBranch Medical Technology Inc."]

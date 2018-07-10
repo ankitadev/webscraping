@@ -9,9 +9,9 @@ option.add_argument("--disable-infobars")
 
 browser = webdriver.Chrome(executable_path='../include/chromedriver', chrome_options=option)
 
-for i in range(303928, 400000):
+for i in range(303928, 500000):
     try:
-        print ('\n\n\n')
+        print ('\n')
         print ('********************** COMPANY', i, '********************')
         business_url = "https://businesssearch.sos.ca.gov/CBS/SearchResults?SearchType=NUMBER&SearchCriteria=C0" + str(i) + "&SearchSubType=Exact"
         browser.get(business_url)
@@ -52,7 +52,7 @@ for i in range(303928, 400000):
         key = convert(element2)
         value = convert(element1)
 
-        with open('california-state.csv', 'a') as csvfile:
+        with open('california-state_22.csv', 'a') as csvfile:
             writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
             writer.writerow(mylist + value)
         csvfile.close()
