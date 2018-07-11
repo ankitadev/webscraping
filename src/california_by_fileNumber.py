@@ -9,7 +9,7 @@ option.add_argument("--disable-infobars")
 
 browser = webdriver.Chrome(executable_path='../include/chromedriver', chrome_options=option)
 
-for i in range(303928, 500000):
+for i in range(309694, 500000):
     try:
         print ('\n')
         business_url = "https://businesssearch.sos.ca.gov/CBS/SearchResults?SearchType=NUMBER&SearchCriteria=C0" + str(i) + "&SearchSubType=Exact"
