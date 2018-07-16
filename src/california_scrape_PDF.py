@@ -24,10 +24,14 @@ for item in myFileNumberArray:
 
         registration_key = browser.find_elements_by_xpath("//button[@class='btn btn-link docImage']")
 
-        for i in len(registration_key):
-            pdf_url = registration_key[i].get_attribute("value")
-            urllib.urlretrieve(pdf_url, "California_" + item + "_type.pdf")
+        for i in range(0, len(registration_key)-1):
+            j = i+1
+            pdf_value = registration_key[i].get_attribute("value")
+            pdf_title_type = browser.find_element_by_xpath('//*[@id="docTable"]/tbody/tr['+str(j)+']').text
+            pdf_url = "https://businesssearch.sos.ca.gov/Document/RetrievePDF?Id=" + str(pdf_value)
+            urllib.urlretrieve(pdf_url, "California_"+item+"_"+pdf_title_type+".pdf")
 
     except NoSuchElementException:
         print("No PDF found in this page!!")
         continue
+
