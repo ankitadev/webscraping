@@ -11,14 +11,14 @@ have to feed:
 <n>string</n> ---- Name of the company
 
 '''
-myNameArray = open("domestic_delaware.txt").readlines()
+myNameArray = open("getSingleMatch.txt").readlines()
 url = "https://www.bizapedia.com/bdmservice.asmx?op=LCBN"
-name_k = "ZVJDKQEVOZOMJBDJCG"
+name_k = "HKETHTSBURPBWZDTCZ"
 name_pa = "DE"
 
 for ite in myNameArray:
     print ("COMPANY NAME: ", ite)
-    name_n = "Dropbox"
+    name_n = ite
 
     xml = """<?xml version="1.0" encoding="utf-8"?>
     <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">  <soap12:Body>
@@ -33,19 +33,19 @@ for ite in myNameArray:
 
     result = requests.post(url=url,data=xml,headers=headers)
 
-    #print('STATUS CODE : ',result.status_code, '\n RESPONSE : \n', str(result.content))
+    print('STATUS CODE : ',result.status_code, '\n RESPONSE : \n', str(result.content))
 
     tree = ET.fromstring(str(result.content))
 
-    company = tree.findall('.//{https://www.bizapedia.com/}Company')
+    company = tree.findall('.//{https://www.bizapedia.com/}LCBNResult')
     print ("COUNT: ", len(company))
 
-    with open('COUNT_ALL_DOVER_BIzapedia.csv', 'a') as csvfile:
+    with open('COUNT_singleMatch.csv', 'a') as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
         writer.writerow([ite]  + [str(len(company))])
     csvfile.close()
 
-    for item in tree.iter('{https://www.bizapedia.com/}Company'):
+    for item in tree.iter('{https://www.bizapedia.com/}LCBNResult'):
         print ("hello loop")
         x1 = item.find('{https://www.bizapedia.com/}EntityName').text  # Company Name
         x2 = item.find('{https://www.bizapedia.com/}FileNumber').text  # File Number
@@ -81,7 +81,7 @@ for ite in myNameArray:
         x32 = item.find('.//{https://www.bizapedia.com/}LastUpdateDate').text  # Last Update Date
         x33 = item.find('.//{https://www.bizapedia.com/}RelevanceScore').text  # Relevance Score
 
-        with open('DOVER_Stanford_All_BIzapedia.csv', 'a') as csvfile:
+        with open('DOVER_SingleMatch.csv', 'a') as csvfile:
             writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
             writer.writerow(
                 [x1] + [x2] + [x3] + [x4] + [x5] + [x6] + [x7] + [x8] + [x9] + [x10] + [x11] + [x12] + [x13] + [x14] + [

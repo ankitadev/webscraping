@@ -12,18 +12,18 @@ have to feed:
 <c>string</c> ---- city
 
 '''
-myNameArray = open("domestic_delaware.txt").readlines()
+myNameArray = open("yesAll.txt").readlines()
 
 url = "https://www.bizapedia.com/bdmservice.asmx?op=LCSBN"
-name_k = "ZVJDKQEVOZOMJBDJCG"
+name_k = "HKETHTSBURPBWZDTCZ"
     #live key HKETHTSBURPBWZDTCZ
     #test Key ZVJDKQEVOZOMJBDJCG
 name_pa = "DE"
-name_c = "Dover"
+name_c = "WILMINGTON"
 
 for ite in myNameArray:
     print ("COMPANY NAME: ", ite)
-    name_n = ite.replace('\n', '')
+    name_n = ite
 
     xml = """<?xml version="1.0" encoding="utf-8"?>
     <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
@@ -48,9 +48,9 @@ for ite in myNameArray:
     company = tree.findall('.//{https://www.bizapedia.com/}Company')
     print ("COUNT: ", len(company))
 
-    with open('COUNT_ALL_DOVER_BIzapedia.csv', 'a') as csvfile:
+    with open('COUNT_FINAL_WILMINGTON.csv', 'a') as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        writer.writerow([ite] + [name_c] + [str(len(company))])
+        writer.writerow([ite] + [str(len(company))])
     csvfile.close()
 
     for item in tree.iter('{https://www.bizapedia.com/}Company'):
@@ -89,7 +89,7 @@ for ite in myNameArray:
         x32 = item.find('.//{https://www.bizapedia.com/}LastUpdateDate').text                           #Last Update Date
         x33 = item.find('.//{https://www.bizapedia.com/}RelevanceScore').text                           #Relevance Score
 
-        with open('DOVER_Stanford_All_BIzapedia.csv', 'a') as csvfile:
+        with open('FINAL_WILMINGTON.csv', 'a') as csvfile:
             writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-            writer.writerow([x1]+[x2]+[x3]+[x4]+[x5]+[x6]+[x7]+[x8]+[x9]+[x10]+[x11]+[x12]+[x13]+[x14]+[x15]+[x16]+[x17]+[x18]+[x19]+[x20]+[x21]+[x22]+[x23]+[x24]+[x25]+[x26]+[x27]+[x28]+[x29]+[x30]+[x31]+[x32]+[x33])
+            writer.writerow([ite] + [x1] + [str(len(company))] +[x2]+[x3]+[x4]+[x5]+[x6]+[x7]+[x8]+[x9]+[x10]+[x11]+[x12]+[x13]+[x14]+[x15]+[x16]+[x17]+[x18]+[x19]+[x20]+[x21]+[x22]+[x23]+[x24]+[x25]+[x26]+[x27]+[x28]+[x29]+[x30]+[x31]+[x32]+[x33])
         csvfile.close()
