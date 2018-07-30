@@ -22,7 +22,7 @@ def criteria(entity_id):
 
 def get_search(entity_id):
     response = requests.get(
-        url='https://businesssearch.sos.ca.gov/CBS/SearchResults',
+        url='https://businesssearch.sos.ca.gov/',
         params={
             'SearchType': 'NUMBER',
             'SearchCriteria': criteria(entity_id),
@@ -70,6 +70,6 @@ def get_info(entity_id):
 
 
 # Make sure things are working
-for entity_id in ['00400000', '00303928']:
+for entity_id in ['300000', '300001']:
     info = get_info(entity_id)
     print(info)
