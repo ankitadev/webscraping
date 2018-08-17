@@ -3,6 +3,8 @@ from selenium.common.exceptions import NoSuchElementException
 import csv
 import pdb
 
+from selenium.webdriver.common.keys import Keys
+
 option = webdriver.ChromeOptions()
 option.add_argument("--incognito")
 option.add_argument("--disable-infobars")
@@ -64,6 +66,7 @@ for item in myNameArray:
         inputElement = browser.find_element_by_xpath('//*[@id="MainContent_txtEntityName"]')
 
         inputElement.send_keys(item)
+        inputElement.send_keys(Keys.RETURN)
         pdb.set_trace()
         # go_button = browser.find_element_by_xpath('//*[@id="MainContent_btnSearch"]')
         # titles_element = browser.find_element_by_xpath('//*[@id="MainContent_SearchControl_grdSearchResultsEntity"]/tbody/tr[2]/td[1]/a').click()

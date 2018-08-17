@@ -9,7 +9,7 @@ have to feed:
 <n>string</n> ---- Name of the company
 
 '''
-
+myNameArray = open("Untitled 10.txt").readlines()
 url = "https://www.bizapedia.com/bdmservice.asmx?op=LCBN"
 name_k = "ZVJDKQEVOZOMJBDJCG"
 name_pa = "DE"
