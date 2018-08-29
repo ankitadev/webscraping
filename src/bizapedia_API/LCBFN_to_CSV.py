@@ -3,32 +3,34 @@ import xml.etree.ElementTree as ET
 import csv
 
 '''
-Lookup company by company name, you will get only one company 
+Lookup company by File number, you will get only one company 
 
 have to feed:
 <k>string</k> ---- API Key
 <pa>string</pa> -- State
-<n>string</n> ---- Name of the company
-
+<fn>string</fn> ---- File Number
 '''
+
 myNameArray = open("getSingleMatch.txt").readlines()
-url = "https://www.bizapedia.com/bdmservice.asmx?op=LCBN"
-name_k = "ZVJDKQEVOZOMJBDJCG"
+url = "https://www.bizapedia.com/bdmservice.asmx?op=LCBFN"
+name_k = "HKETHTSBURPBWZDTCZ"
+# "HKETHTSBURPBWZDTCZ"
 name_pa = "DE"
 
 for ite in myNameArray:
     print ("COMPANY NAME: ", ite)
-    name_n = ite
+    name_fn = ite
 
     xml = """<?xml version="1.0" encoding="utf-8"?>
-    <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">  <soap12:Body>
-        <LCBN xmlns="https://www.bizapedia.com/">
+    <soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">
+      <soap12:Body>
+        <LCBFN xmlns="https://www.bizapedia.com/">
           <k>{k}</k>
-          <n>{n}</n>
           <pa>{pa}</pa>
-        </LCBN>
+          <fn>{fn}</fn>
+        </LCBFN>
       </soap12:Body>
-    </soap12:Envelope>""".format(k=name_k,n=name_n,pa=name_pa)
+    </soap12:Envelope>""".format(k=name_k, pa=name_pa, fn=name_fn)
     headers = {'Content-Type': 'application/soap+xml'}
 
     result = requests.post(url=url,data=xml,headers=headers)
@@ -37,15 +39,15 @@ for ite in myNameArray:
 
     tree = ET.fromstring(str(result.content))
 
-    company = tree.findall('.//{https://www.bizapedia.com/}LCBNResult')
+    company = tree.findall('.//{https://www.bizapedia.com/}LCBFNResult')
     print ("COUNT: ", len(company))
 
-    with open('COUNT_singleMatch.csv', 'a') as csvfile:
+    with open('forth_batch.csv', 'a') as csvfile:
         writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-        writer.writerow([ite]  + [str(len(company))])
+        writer.writerow([ite] + [str(len(company))])
     csvfile.close()
 
-    for item in tree.iter('{https://www.bizapedia.com/}LCBNResult'):
+    for item in tree.iter('{https://www.bizapedia.com/}LCBFNResult'):
         print ("hello loop")
         x1 = item.find('{https://www.bizapedia.com/}EntityName').text  # Company Name
         x2 = item.find('{https://www.bizapedia.com/}FileNumber').text  # File Number

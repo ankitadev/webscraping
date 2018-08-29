@@ -7,7 +7,6 @@ have to feed:
 <k>string</k> ---- API Key
 <pa>string</pa> -- State
 <fn>string</fn> ---- File Number
-
 '''
 
 url = "https://www.bizapedia.com/bdmservice.asmx?op=LCBFN"

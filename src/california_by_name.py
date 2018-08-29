@@ -61,7 +61,7 @@ for item in myNameArray:
         key = convert(element2)
         value = convert(element1)
 
-        with open('california-Stanford_List.csv', 'a') as csvfile:
+        with open('california-TEST_SECOND_ROUND.csv', 'a') as csvfile:
             writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
             writer.writerow(mylist + value)
         csvfile.close()
